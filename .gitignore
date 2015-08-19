@@ -1,0 +1,21 @@
+
+# Oasis build
+
+/app/_build/
+/app/_tags
+/app/**/*.byte
+/app/myocamlbuild.ml
+/app/setup.data
+/app/setup.log
+/app/setup.ml
+
+# ARM build
+
+/provisioning/raspberry-devbox-master/app/src/
+/provisioning/raspberry-devbox-master/app/_oasis
+
+# Vagrant
+.vagrant
+
+# Mac OS misc files
+.DS_Store
