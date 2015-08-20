@@ -13,3 +13,4 @@ make install
 
 opam init --yes
 opam install oasis --yes
+opam install ounit --yes

@@ -32,9 +32,4 @@
     ensure => installed
   }
   
-  file {'/home/vagrant/install-opam.sh':
-    source  => 'puppet:///modules/raspbian/install-opam.sh',
-    mode    => '0755'
-  }
-  
 }

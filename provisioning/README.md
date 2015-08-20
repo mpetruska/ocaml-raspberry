@@ -6,7 +6,7 @@ https://github.com/nickhutchinson/raspberry-devbox
 
 Modifications:
 - Vagrantfile: upgraded
-- modules/raspberry_dev/files/rootfs/etc/puppet/modules/raspbian/files/install-opam.sh: new file to install opam and oasis
+- install-opam.sh: new file to install opam and oasis
 - modules/raspberry_dev/files/rootfs/etc/puppet/modules/raspbian/manifests/init.pp: ocaml dev packages added
 
 ## Prerequisites

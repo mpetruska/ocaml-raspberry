@@ -7,7 +7,17 @@ License:     MIT
 Plugins:     META (0.4)
 
 Executable sampler
-  Path:       src
-  BuildTools: ocamlbuild
-  MainIs:     main.ml
-  
+  Path:           src
+  BuildTools:     ocamlbuild
+  MainIs:         main.ml
+
+Executable sampler_test
+  Path:         test
+  BuildTools:   ocamlbuild
+  MainIs:       test.ml
+  BuildDepends: oUnit
+  Install:      false
+
+Test sampler
+  Command:   $sampler_test
+  TestTools: sampler_test
