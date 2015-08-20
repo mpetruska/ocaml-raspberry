@@ -1,10 +1,12 @@
 
-cp app/_oasis provisioning/raspberry-devbox-master/app/
-cp app/src/* provisioning/raspberry-devbox-master/app/src/
+mkdir -p provisioning/raspberry-devbox-master/app/src
+cp -f app/_oasis provisioning/raspberry-devbox-master/app/
+cp -f app/build.sh provisioning/raspberry-devbox-master/app/
+cp -rf app/src/* provisioning/raspberry-devbox-master/app/src/
 
 cd provisioning/raspberry-devbox-master
-vagrant ssh -c "sb2 -eR cd /vagrant/app && sb2 -eR oasis setup && sb2 -eR ocaml setup.ml -configure && sb2 -eR ocaml setup.ml -build"
 
-sb2 < "cd /vagrant/app && oasis setup && ocaml setup.ml -configure && ocaml setup.ml -build"
+vagrant ssh -c "cp -rf /vagrant/app . && echo \"cd /home/vagrant/app && ./build.sh\" | sb2 -eR"
+vagrant ssh -c "mkdir -p /vagrant/arm_out && cp -f /home/vagrant/app/main.byte /vagrant/arm_out"
 
-echo "eval `opam config env` && cd /vagrant/app && oasis setup && ocaml setup.ml -configure && ocaml setup.ml -build" | sb2
+cp -rf arm_out ../../

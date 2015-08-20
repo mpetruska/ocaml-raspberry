@@ -11,8 +11,8 @@
 
 # ARM build
 
-/provisioning/raspberry-devbox-master/app/src/
-/provisioning/raspberry-devbox-master/app/_oasis
+/provisioning/raspberry-devbox-master/app/
+**/arm_out
 
 # Vagrant
 .vagrant
