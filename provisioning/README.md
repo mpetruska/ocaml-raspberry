@@ -22,6 +22,3 @@ Modifications:
 ## Starting the box for cross-compilation
 
 `vagrant up` (from directory containing *VagrantFile*).
-
-## Cross-compiling
-
