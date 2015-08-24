@@ -2,5 +2,5 @@
 
 eval `opam config env`
 oasis setup
-ocaml setup.ml -configure > /dev/null
+ocaml setup.ml -configure --enable-tests > /dev/null
 ocaml setup.ml -build

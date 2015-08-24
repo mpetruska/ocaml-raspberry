@@ -1,3 +1,4 @@
+#!/bin/bash
 
 cd /home/vagrant
 mkdir git
@@ -12,5 +13,5 @@ make
 make install
 
 opam init --yes
-opam install oasis --yes
-opam install ounit --yes
+opam switch 4.02.3
+./install-opam-packages.sh

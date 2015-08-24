@@ -10,6 +10,7 @@ Executable sampler
   Path:           src
   BuildTools:     ocamlbuild
   MainIs:         main.ml
+  BuildDepends:   core, async, threads
 
 Executable sampler_test
   Path:         test
