@@ -1,4 +1,6 @@
 
+open Core.Std
+
 let delay = Core.Span.of_sec 1.0
 
 (*
@@ -13,13 +15,25 @@ let schedule_jobs () =
 let data i =
   (Printf.sprintf "A [%d] - %.0f" i (Unix.time ()))
 
-let schedule_jobs () =
-  let connection = Tcp_client.connect ~host:"127.0.0.1" ~port:12233 in
+let schedule_jobs host port () =
+  let connection = Tcp_client.connect ~host ~port in
   Periodic.(
     every delay (loop (1, connection) (fun (i, connection) ->
                                            (i + 1, Tcp_client.send connection (data i))))
     |> schedule_job
   )
 
+let main host port () =
+  Async.Std.Scheduler.go_main ~main:(schedule_jobs host port) () |> Core.Std.never_returns
+
+let command =
+  Command.basic
+    ~summary: "Sends measurements periodically to a TCP server"
+    Command.Spec.(
+      empty
+      +> flag "-h" (required string) ~doc: "string The host to connect to"
+      +> flag "-p" (required int) ~doc: "int The port to connect to")
+    main
+
 let () =
-    Async.Std.Scheduler.go_main ~main:schedule_jobs () |> Core.Std.never_returns
+  Command.run ~version: "0.1" command 

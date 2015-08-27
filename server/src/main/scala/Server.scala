@@ -4,6 +4,7 @@ import java.util.concurrent.TimeUnit
 import akka.actor.{Cancellable, Props, Actor}
 import akka.io.{IO, Tcp}
 import akka.util.ByteString
+import com.typesafe.config.ConfigFactory
 
 import scala.concurrent.duration.FiniteDuration
 
@@ -12,7 +13,9 @@ class Server extends Actor {
   import Tcp._
   import context.system
 
-  IO(Tcp) ! Bind(self, new InetSocketAddress("localhost", 12233))
+  val port = ConfigFactory.load().getInt("tcp.port")
+
+  IO(Tcp) ! Bind(self, new InetSocketAddress("localhost", port))
 
   def receive = {
     case 'Start =>

@@ -31,7 +31,6 @@ let connect_to_server connection =
           | Core.Std.Ok (_, r, w) ->
               let connection = { connection with status = Connected (r, w); is_connected = true } in
               upon (w |> Writer.monitor |> Monitor.get_next_error) (fun _ -> print_endline "disconnected"; connection.is_connected <- false);
-              Writer.set_raise_when_consumer_leaves w false;
               connection
           | Core.Std.Error _      ->
               print_endline (Printf.sprintf "Could not connect to %s" (string_of_parameters connection.parameters));
@@ -40,7 +39,6 @@ let connect_to_server connection =
 let send_to_server bytes connection =
   match connection.status with
   | Connected (_, w) when connection.is_connected ->
-      print_endline "write";
       Writer.write w bytes |> ignore;
       return connection
   | _ ->
