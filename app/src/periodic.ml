@@ -1,22 +1,25 @@
 
 open Async.Std
 
+type continuation = { f: unit -> continuation }
+
 type t =
   {
     delay: Core.Span.t;
-    f: int -> unit
+    continuation: continuation
   }
 
-let every delay f = { delay; f }
+let delayed f = { f }
 
-let schedule_job { delay; f } =
-  let rec run_job i =
-    let clock_delay () = Clock.after delay in
-    don't_wait_for (clock_delay () >>| fun () -> run_job (i + 1));
-    don't_wait_for (clock_delay () >>| fun () -> f i)
-  in
-  
-  run_job 0
+let rec loop x f () = { f = loop (f x) f }
+
+let every delay f = { delay; continuation = delayed f }
+
+let rec schedule_job { delay; continuation } =
+  let clock_delay () = Clock.after delay in
+  don't_wait_for (clock_delay () >>| fun () ->
+    let next = continuation.f () in
+    schedule_job { delay; continuation = next })
 
 let schedule_jobs =
   List.iter schedule_job

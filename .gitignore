@@ -17,5 +17,13 @@
 # Vagrant
 .vagrant
 
+# sbt
+
+/server/**/target/
+
+# Idea
+
+**/.idea/
+
 # Mac OS misc files
 .DS_Store
