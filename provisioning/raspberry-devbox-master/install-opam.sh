@@ -14,4 +14,4 @@ make install
 
 opam init --yes
 opam switch 4.02.3
-./install-opam-packages.sh
+../../install-opam-packages.sh

@@ -19,8 +19,6 @@ Modifications:
 1. `vagrant up` (from directory containing *VagrantFile*).
 2. Execute `./provision-ocaml.sh` from the same directory.
 
-TODO: `install-opam-packages.sh` is not executed correctly
-
 ## Starting the box for cross-compilation
 
 `vagrant up` (from directory containing *VagrantFile*).

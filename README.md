@@ -12,5 +12,3 @@
 
 1. Start up/provision the vagrant box (see: provisioning/README.md)
 2. Execute `./arm-build.sh`
-
-TODO: missing ```eval `opam config env` ```
